@@ -1,0 +1,17 @@
+{
+  "expo": {
+    "name": "ProjetoTCC",
+    "slug": "ProjetoTCC",
+    "version": "1.0.0",
+    "icon": "./src/assets/logolo.png",
+    "splash": {
+      "image": "./src/assets/logololo.png",
+      "backgroundColor": "#000"
+    },
+    "assetBundlePatterns": [
+      
+      "**/*"
+    ]
+  },
+  "name": "ProjetoTCC"
+}
