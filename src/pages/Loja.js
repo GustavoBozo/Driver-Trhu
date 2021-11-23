@@ -16,6 +16,7 @@ export default ({ navigation, route }) => {
 
     return (
         <LinearGradient colors={['#93BFDE', '#ffffff']} style={styles.container}>
+        <ScrollView>
         <View style={styles.shopInfo}>
         <View style={{flexDirection: 'row', marginTop: 15}}>
           <Avatar.Image
@@ -69,7 +70,11 @@ export default ({ navigation, route }) => {
               <Text style={styles.menuItemText} onPress={() => navigation.navigate('GPS')}>Localizar no Mapa</Text>
             </View>
           </TouchableRipple>
+          <TouchableOpacity onPress={() => navigation.navigate('Pedido')}>
+          <Text style={styles.signupButton}>Realizar Pedido</Text>  
+        </TouchableOpacity>
         </View>
+        </ScrollView>
         </LinearGradient>
       );
     };
@@ -125,6 +130,10 @@ const styles = StyleSheet.create({
     swiperImage: {
       flex:1,
       resizeMode:'contain',
+    },
+    signupButton: {
+      color: '#399fff',
+      fontWeight: 'bold',
     },
   });
 

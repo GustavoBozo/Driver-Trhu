@@ -6,6 +6,7 @@ import Register from './src/pages/Register';
 import Home from './src/pages/Home';
 import GPS from './src/pages/GPS';
 import Loja from './src/pages/Loja';
+import Pedido from './src/pages/Pedido';
 
 export default function App() {
   const Stack = createStackNavigator();
@@ -19,6 +20,7 @@ initialRouteName="Login"
     <Stack.Screen component={Register} name='Register'/>
     <Stack.Screen component={Home} name='Home'/>
     <Stack.Screen component={Loja} name='Loja' />
+    <Stack.Screen component={Pedido} name='Pedido' />
     <Stack.Screen component={GPS} name='GPS'/>
   </Stack.Navigator>
   </NavigationContainer>

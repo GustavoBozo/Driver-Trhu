@@ -26,13 +26,14 @@ export default ({ navigation }) => {
     });
   }
   
+  
 
   
   
   return (
-    <ScrollView>
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
     <LinearGradient colors={['#2683DE', '#93BFDE', '#ffffff']} style={styles.gradient}>
+    <ScrollView>
     <View style={styles.container}>
       <StatusBar translucent={true}/>
       <Image
@@ -92,9 +93,9 @@ export default ({ navigation }) => {
         </TouchableOpacity>
       </View>
     </View>
+    </ScrollView> 
     </LinearGradient>
     </TouchableWithoutFeedback>
-    </ScrollView> 
   );
 }
 

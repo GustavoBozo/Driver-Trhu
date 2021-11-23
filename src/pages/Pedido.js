@@ -10,7 +10,6 @@ import { Entypo } from '@expo/vector-icons';
 export default ({ navigation }) => {
   // const userCollections = firestore().userCollections('Usuario')
   const db = firebase.firestore()
-
   const [email, setEmail ] = useState('');
   const [senha, setSenha ] = useState('');
   const [cell, setCell ] = useState('');
@@ -27,37 +26,7 @@ export default ({ navigation }) => {
     setNome('')
   }
 
-async function CreateUser(){
-    await db.collection('Usuarios').add({
-       nome,
-       email,
-       senha,
-       cpf,
-       cell,
-    })
-    .then(() => {
-         Limpar()        
-    })
-    .catch((error) => {
-        console.error("Error writing document: ", error);
-    });
-    }
 
-function Authentication(){
-  firebase.auth().createUserWithEmailAndPassword(email, senha)
-  .then((userCredential) => {
-    var user = userCredential.user;
-  })
-  .catch((error) => {
-    var errorCode = error.code;
-    var errorMessage = error.message;
-  });
-}
-
-function Combinacao(){
-  CreateUser();
-  Authentication(email, senha)
-}
 // function writeUserData(nome, cell, senha, email, cpf, userID) {
 //   firebase.database().ref('users').once('value', (data) => {
 //     console.log(data.toJSON)
@@ -88,6 +57,7 @@ function Combinacao(){
 // });
 
 // }
+
 
 
  
@@ -179,7 +149,7 @@ function Combinacao(){
       />
       </View>
 
-      <TouchableOpacity style={styles.registerButton} onPress={()=>{Combinacao(email, senha)}}>
+      <TouchableOpacity style={styles.registerButton} onPress={()=>{writeUserData(nome, cell, senha, email, cpf)}}>
           <Text style={styles.registerText}>Registre-se</Text>
       </TouchableOpacity>
       <View style={styles.divisor}>
