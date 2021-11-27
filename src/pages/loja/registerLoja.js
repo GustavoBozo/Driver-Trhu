@@ -2,38 +2,44 @@ import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, Image, TextInput, TouchableOpacity, Keyboard, TouchableWithoutFeedback, SafeAreaView, ScrollView} from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
+import { useNavigation } from '@react-navigation/native';
 import { TextInputMask } from 'react-native-masked-text';
 import firebase from './firebaseConfig';
 import { Entypo } from '@expo/vector-icons';
 
 
-export default ({ navigation }) => {
+export default () => {
+  const navigation = useNavigation();
   // const userCollections = firestore().userCollections('Usuario')
-  const db = firebase.firestore()
-
+ 
   const [email, setEmail ] = useState('');
   const [senha, setSenha ] = useState('');
   const [cell, setCell ] = useState('');
-  const [cpf, setCpf ] = useState('');
+  const [numero, setNumero ] = useState('');
+  const [endereco, setEndereco ] = useState('');
+  const [cnpj, setCnpj ] = useState('');
   const [nome, setNome ] = useState('');
   const [hidePass, setHidePass] = useState(true);
   
-
-  function Limpar(){
+function Limpar(){
     setEmail('')
     setSenha('')
-    setCpf('')
     setCell('')
+    setCnpj('')
+    setNumero('')
+    setEndereco('')
     setNome('')
-  }
+}
 
-async function CreateUser(){
-    await db.collection('Usuarios').add({
-       nome,
+async function CreateLoja(){
+    await db.collection('Lojas').add({
        email,
        senha,
-       cpf,
        cell,
+       numero,
+       endereco,
+       cnpj,
+       nome,
     })
     .then(() => {
          Limpar()        
@@ -41,36 +47,40 @@ async function CreateUser(){
     .catch((error) => {
         console.error("Error writing document: ", error);
     });
-    }
+}
 
 function Authentication(){
-  firebase.auth().createUserWithEmailAndPassword(email, senha)
-  .then((userCredential) => {
-    var user = userCredential.user;
-  })
-  .catch((error) => {
-    var errorCode = error.code;
-    var errorMessage = error.message;
-  });
+    firebase.auth().createUserWithEmailAndPassword(email, senha)
+    .then((userCredential) => {
+      var user = userCredential.user;
+    })
+    .catch((error) => {
+      var errorCode = error.code;
+      var errorMessage = error.message;
+    });
 }
-  
+    
 function Combinacao(){
-  CreateUser();
-  Authentication(email, senha)
+    CreateLoja();
+    Authentication(email, senha)
 }
-// function writeUserData(nome, cell, senha, email, cpf, userID) {
-//   firebase.database().ref('users').once('value', (data) => {
+
+
+// function writeUserData(nome, cell, senha, email, cnpj, userID, rua, numero) {
+//   firebase.database().ref('lojas').once('value', (data) => {
 //     console.log(data.toJSON)
 //   })
 
-//   firebase.database().ref('users/003').set(
+//   firebase.database().ref('users/001').set(
 //     {
          
 //         nome: nome,
 //         email: email,
 //         senha: senha,
-//         cpf: cpf,
+//         cnpj: cnpj,
 //         cell: cell,
+//         rua: rua,
+//         numero: numero,
 //     } 
 // ).then(() => {
 //   console.log('INSERTED !');
@@ -92,9 +102,9 @@ function Combinacao(){
 
  
   return (
+    <ScrollView>
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
     <LinearGradient colors={['#2683DE', '#93BFDE', '#ffffff']} style={styles.gradient}>
-    <ScrollView>
     <SafeAreaView style={styles.container}>
       <StatusBar translucent={true}/>
       <Image
@@ -102,16 +112,41 @@ function Combinacao(){
         style={styles.logo}
       />
  
-      <Text style={styles.textUp}>Nome de Usuário:</Text>
+      <Text style={styles.textUp}>Nome do Estabelecimento:</Text>
       <View style={styles.inputContainer}>
       <TextInput
-      placeholder="Digite seu Nome de Usuário"
+      placeholder="Digite seu Nome do seu Estabelecimento"
       style={styles.input}
       value={nome}
       onChangeText={ nome => setNome(nome) }
       
       />
       </View>
+     
+      <Text style={styles.textUp}>Nome da Rua:</Text>
+      <View style={styles.inputContainer}>
+      <TextInput
+      placeholder="Digite o Endereço do seu Estabelecimento"
+      style={styles.input}
+      value={endereco}
+      onChangeText={ endereco => setEndereco(endereco) }
+      
+      />
+      </View>
+     
+
+      <Text style={styles.textUp}>Número do Estabelecimento:</Text>
+      <View style={styles.inputContainer}>
+      <TextInput
+      placeholder="Digite o Número do seu Estabelecimento"
+      style={styles.input}
+      value={numero}
+      onChangeText={ numero => setNumero(numero) }
+      
+      />
+      </View>
+
+
 
       <Text style={styles.textUp}>E-mail:</Text>
       <View style={styles.inputContainer}>
@@ -146,15 +181,15 @@ function Combinacao(){
               /> 
       </View>
 
-      <Text style={styles.textUp}>CPF:</Text>
+      <Text style={styles.textUp}>CNPJ:</Text>
 
       <View style={styles.inputContainer}>
       <TextInputMask
-      placeholder="Digite seu CPF"
+      placeholder="Digite seu CNPJ"
       style={styles.input}
-      type={'cpf'}
-      value={cpf}
-      onChangeText={ cpf => setCpf(cpf) }
+      type={'cnpj'}
+      value={cnpj}
+      onChangeText={ cnpj => setCnpj(cnpj) }
       
       
       />
@@ -188,15 +223,15 @@ function Combinacao(){
         <View style={styles.divisorLine}></View>
       </View>
       <View style={styles.loginContainer}> 
-        <Text style={styles.loginText}>Já possui uma conta?</Text>
+        <Text style={styles.loginText}>Já cadastrou sua loja ?</Text>
         <TouchableOpacity onPress={() => navigation.navigate('Login')}>
           <Text style={styles.loginButton}>Fazer Login</Text>  
         </TouchableOpacity>
       </View>
     </SafeAreaView>
-    </ScrollView>
     </LinearGradient>
     </TouchableWithoutFeedback>
+    </ScrollView>
   );
 }
 

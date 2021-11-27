@@ -74,6 +74,10 @@ export default ({ navigation }) => {
       <View style={styles.forgotContainer}>
         <TouchableOpacity>
           <Text style={styles.forgotText}>Esqueceu sua senha?</Text>
+
+          <Text  onPress={() => navigation.navigate('loginLoja')} 
+          style={styles.forgotText}>Deseja Logar como Loja</Text>
+          
         </TouchableOpacity>
       </View>
       <TouchableOpacity style={styles.loginButton} onPress={()=>{LoginFirebase()}} >
@@ -87,7 +91,7 @@ export default ({ navigation }) => {
       </View>
 
       <View style={styles.signupContainer}> 
-        <Text style={styles.signupText}>Não possui uma conta?</Text>
+        <Text style={styles.signupText}>Não possui uma conta ?</Text>
         <TouchableOpacity onPress={() => navigation.navigate('Register')}>
           <Text style={styles.signupButton}>Cadastre-se</Text>  
         </TouchableOpacity>
