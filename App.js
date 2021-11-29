@@ -9,7 +9,7 @@ import Loja from './src/pages/Loja';
 import Pedido from './src/pages/Pedido';
 import setRegister from './src/pages/setRegister';
 import registerLoja from './src/pages/loja/registerLoja';
-import loginLoja from './src/pages/loja/loginLoja';
+import loginLoja from './src/pages/loginLoja';
 
 
 export default function App() {
