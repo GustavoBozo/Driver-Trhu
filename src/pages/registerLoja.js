@@ -12,10 +12,11 @@ export default () => {
   const navigation = useNavigation();
   // const userCollections = firestore().userCollections('Usuario')
  
+  const db = firebase.firestore()
+
   const [email, setEmail ] = useState('');
   const [senha, setSenha ] = useState('');
   const [cell, setCell ] = useState('');
-  const [numero, setNumero ] = useState('');
   const [endereco, setEndereco ] = useState('');
   const [cnpj, setCnpj ] = useState('');
   const [nome, setNome ] = useState('');
@@ -26,7 +27,6 @@ function Limpar(){
     setSenha('')
     setCell('')
     setCnpj('')
-    setNumero('')
     setEndereco('')
     setNome('')
 }
@@ -36,7 +36,6 @@ async function CreateLoja(){
        email,
        senha,
        cell,
-       numero,
        endereco,
        cnpj,
        nome,
@@ -115,7 +114,7 @@ function Combinacao(){
       <Text style={styles.textUp}>Nome do Estabelecimento:</Text>
       <View style={styles.inputContainer}>
       <TextInput
-      placeholder="Digite seu Nome do seu Estabelecimento"
+      placeholder="Nome do seu Estabelecimento"
       style={styles.input}
       value={nome}
       onChangeText={ nome => setNome(nome) }
@@ -126,7 +125,7 @@ function Combinacao(){
       <Text style={styles.textUp}>Nome da Rua:</Text>
       <View style={styles.inputContainer}>
       <TextInput
-      placeholder="Digite o Endereço do seu Estabelecimento"
+      placeholder="Endereço do seu Estabelecimento"
       style={styles.input}
       value={endereco}
       onChangeText={ endereco => setEndereco(endereco) }
@@ -135,19 +134,7 @@ function Combinacao(){
       </View>
      
 
-      <Text style={styles.textUp}>Número do Estabelecimento:</Text>
-      <View style={styles.inputContainer}>
-      <TextInput
-      placeholder="Digite o Número do seu Estabelecimento"
-      style={styles.input}
-      value={numero}
-      onChangeText={ numero => setNumero(numero) }
-      
-      />
-      </View>
-
-
-
+    
       <Text style={styles.textUp}>E-mail:</Text>
       <View style={styles.inputContainer}>
       <TextInput    

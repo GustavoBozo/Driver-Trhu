@@ -27,7 +27,7 @@ export default () => {
         <TouchableOpacity style={styles.registerButton} onPress={() => navigation.navigate('Register')}>
             <Text style={styles.registerText}>Registrar-se como Usuário</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.registerButton} onPress={() => navigation.navigate('RegisterLoja')}>
+        <TouchableOpacity style={styles.registerButton} onPress={() => navigation.navigate('registerLoja')}>
             <Text style={styles.registerText}>Registrar-se como Loja</Text>
         </TouchableOpacity>
         <View style={styles.divisor}>
